@@ -68,8 +68,8 @@ def make_dataset(path='MAS'):
     '''
     os.makedirs(path+'/temp', exist_ok=True)
     os.makedirs(path + '/clips', exist_ok=True)
-    shutil.copy('annotations.json', os.path.join(path, 'annotations.json'))
-    with open('videos.json') as f:
+    shutil.copy('jsons/annotations.json', os.path.join(path, 'annotations.json'))
+    with open('jsons/videos.json') as f:
         videos= json.load(f)
 
     for video in tqdm(videos):
