@@ -32,10 +32,10 @@ of a person is visible. Then, we used a two-step data annotation
 process:
 
 ### (1) Clip Selection: 
-Two researcherS with a background in Computer
+Two researchers with a background in Computer
 Science selected videos from two YouTube channels in reverse
 chronological order of publication. Then, for each video selected
-from the two channels, short video clips were selected using the Label Studio [82] video annotation tool. For the SWU channel, a video
+from the two channels, short video clips were selected using the Label Studio video annotation tool. For the SWU channel, a video
 was deemed useful if it showed at least one instance with no stress
 signs and another that displayed one or more of the following stress
 indicators: facial stress, sentiment stress, vocal stress, or fidgeting.
