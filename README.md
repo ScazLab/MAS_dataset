@@ -86,7 +86,7 @@ non-stressed states was 0.85 indicating an excellent agreement.
 ### Running the Script
 From the `MAS_dataset` directory, run the following command:
 ```
-python3 scripts/create_dataset.py
+python3 dataset/create_dataset.py
 ```
 This will download all clips from Youtube.
 

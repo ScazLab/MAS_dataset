@@ -12,7 +12,7 @@ from pytube.innertube import _default_clients
 
 
 # this is a workaround for a current bug in pytube.
-# In the future, it may br possible (or necessary) to remove it
+# In the future, it may be possible (or necessary) to remove it
 _default_clients["ANDROID"]["context"]["client"]["clientVersion"] = "19.08.35"
 _default_clients["IOS"]["context"]["client"]["clientVersion"] = "19.08.35"
 _default_clients["ANDROID_EMBED"]["context"]["client"]["clientVersion"] = "19.08.35"
