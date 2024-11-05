@@ -1,4 +1,5 @@
-# MAS Dataset
+# MAS Dataset and Official Code for Integrating Multimodal Affective Signals for Stress Detection from Audio-Visual Data
+
 *Debasmita Ghose, Oz Gitelson, Brian Scassellati*
 
 *Yale University*
@@ -12,7 +13,9 @@ Stress detection in real-world settings presents significant challenges due to t
 
 ![Dataset Sample Image](assets/dataset1.png)
 
-## Dataset
+# MAS Dataset
+
+## Dataset Methodology
 In this work, we curated a collection of 353 video clips. These
 clips were sourced from two YouTube channels - "Keep it 100"
 playlists created by the channel [The Cut](https://www.youtube.com/@cut) and videos from [Soft White Underbelly](https://www.youtube.com/@SoftWhiteUnderbelly) (SWU) . We selected these channels because
@@ -87,7 +90,10 @@ python3 scripts/create_dataset.py
 ```
 This will download all clips from Youtube.
 
-## Citation
+# Stress Detector
+
+
+# Citation
 ```
 @inproceedings{ghose2024integrating,
   title={Integrating Multimodal Affective Signals for Stress Detection from Audio-Visual Data},
