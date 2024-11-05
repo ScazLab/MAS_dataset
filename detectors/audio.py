@@ -167,7 +167,7 @@ class AudioNode:
         """
         self.phrases = []
     
-    def ros_analyze(self, audio_path: str) -> Tuple[Dict[str, float], float, str]:
+    def analyze(self, audio_path: str) -> Tuple[Dict[str, float], float, str]:
         """
         Performs analysis on an audio file, including STT and sentiment analysis.
 
@@ -207,4 +207,4 @@ if __name__ == '__main__':
     node = AudioNode()
 
     cprint('Analyzing Data...', 'green', attrs=['bold'])
-    print(node.ros_analyze(args.path))
+    print(node.analyze(args.path))

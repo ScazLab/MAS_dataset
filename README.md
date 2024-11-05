@@ -15,7 +15,6 @@ Stress detection in real-world settings presents significant challenges due to t
 
 # MAS Dataset
 
-## Dataset Methodology
 In this work, we curated a collection of 353 video clips. These
 clips were sourced from two YouTube channels - "Keep it 100"
 playlists created by the channel [The Cut](https://www.youtube.com/@cut) and videos from [Soft White Underbelly](https://www.youtube.com/@SoftWhiteUnderbelly) (SWU) . We selected these channels because
@@ -92,6 +91,134 @@ This will download all clips from Youtube.
 
 # Stress Detector
 
+we show how we predict stress indicators by leveraging insights from multiple modalities, as shown in Figure 3. Specifically, we analyze a short video clip of a person speaking about a
+topic on camera and determine if the person is stressed by examining the following four factors: 1) their facial expressions, 2) the
+prosodic intonation in their voice, 3) the sentiment conveyed in
+the content of their speech, and 4) any upper body fidgeting. To
+achieve this, we extract stress signals from each of these modalities using unimodal classifiers and then employ three methods for
+fusing the predictions of the unimodal classifiers to make a final
+binary prediction about whether the person is stressed.
+
+![System Architecture](assets/fusion.png)
+
+## Running and Integrating Unimodal Nodes
+
+Each node can be run independently with command line arguments, or used as part of a larger python program. Here's how to run each node:
+
+### Running the Audio Node
+
+The Audio Node performs audio sentiment analysis (sadness, anger, fear, joy, love, surprise), including speech-to-text (STT) and emotion detection.
+
+**Input:** Video file path.
+
+**Output:** Average emotion scores, speech rate, and transcript.
+
+The following bash command runs the audio node:
+
+```
+python audio.py <path_to_audio_or_video_file>
+```
+
+The following python code creates an audio node and processes a file with it:
+
+```python
+from audio import AudioNode
+
+node = AudioNode()
+emotions, speech_rate, transcript = node.analyze(path)
+```
+
+
+### Running the Face Node
+
+The Face Node detects and analyzes facial emotions (anger, disgust, fear, sadness, neutral, happiness, surprise) in video frames.
+
+**Input:** Video file path.
+
+**Output:** Average emotion scores and the percentage of frames without detected faces.
+
+The following bash command runs the face node:
+
+```
+python face.py <path_to_video_file>
+```
+
+The following python code creates a face node and processes a file with it:
+
+```python
+from face import FaceNode
+
+node = FaceNode()
+emotions, off_screen_percent = node.analyze(path)
+```
+
+
+### Running the Prosodic Node
+
+The Prosodic Node analyzes prosodic features of speech to classify emotions (sad, angry, neutral, happy).
+
+**Input:** Video file path.
+
+**Output:** Average emotion scores
+
+The following bash command runs the prosody node:
+
+```
+python prosodic.py <path_to_audio_or_video_file>
+```
+
+The following python code creates a prosodic node and processes a file with it:
+
+```python
+from prosodic import ProsodicNode
+
+node = ProsodicNode()
+emotions = node.analyze(path)
+```
+
+
+### Running the Fidget Node
+
+The Fidget Node detects fidgeting behavior in video frames using the MoveNet pose estimation model.
+
+**Input:** Video file path.
+
+**Output:** Percentage of frames with detected fidgeting.
+
+The following bash command runs the fidget node:
+
+```
+python fidget.py <path_to_video_file>
+```
+
+The following python code creates a fidget node and processes a file with it:
+
+```python
+from fidget import FidgetNode
+
+node = FidgetNode()
+fidget_percent = node.analyze(path)
+```
+
+## Running and Integrating Fusion Nodes
+### Voting-Based Fusion
+
+The Voting Fusion Node utilizes Voting-Based Late Fusion to detect whether a video subject is exhibiting audiovisual stress. It can be configured to use any combination of the unimodal nodes. 
+
+For more information on running the Voting Fusion Node from the command line, please see
+```commandline
+python3 voting_fusion.py -h
+```
+
+The follow python code creates a voting fusion node, all the unimodal nodes it needs, and makes a prediction using them:
+```python
+face, fidget, audio, prosodic = FaceNode(), FidgetNode(), AudioNode(), ProsodicNode()
+
+fusion_node=VotingFusionNode(audio, face, fidget, prosodic)
+path='path/to/data.mp4'
+prediction, unimodal_data= fusion_node.make_prediction(path)
+```
+![Fusion Performance](assets/fusion_comparison.png)
 
 # Citation
 ```
@@ -103,3 +230,4 @@ This will download all clips from Youtube.
   year={2024}
 }
 ```
+

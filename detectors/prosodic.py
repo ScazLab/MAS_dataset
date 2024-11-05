@@ -95,7 +95,7 @@ class ProsodicNode:
 
         return ret_dic
 
-    def ros_analyze(self, audio_path: str) -> Dict[str, float]:
+    def analyze(self, audio_path: str) -> Dict[str, float]:
         """
         Analyzes an audio file to classify emotions.
 
@@ -128,4 +128,4 @@ if __name__ == '__main__':
     node=ProsodicNode()
 
     cprint('Analyzing Data...', 'green', attrs=['bold'])
-    print(node.ros_analyze(args.path))
+    print(node.analyze(args.path))

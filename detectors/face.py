@@ -89,7 +89,7 @@ class FaceNode:
         """
         self.faces = []
 
-    def ros_analyze(self, video_path: str) -> Tuple[Dict[str, float], float]:
+    def analyze(self, video_path: str) -> Tuple[Dict[str, float], float]:
         """
         Analyzes a sequence of frames for facial emotions and calculates the percentage of frames with no detected faces.
 
@@ -148,6 +148,6 @@ if __name__=='__main__':
     node=FaceNode()
 
     cprint('Analyzing Data...', 'green', attrs=['bold'])
-    print(node.ros_analyze(args.path))
+    print(node.analyze(args.path))
 
 

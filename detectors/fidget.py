@@ -420,51 +420,7 @@ class FidgetNode:
 
         return person, frame
 
-    def ros_analyze(self, video_path: str) -> float:
-        """
-        Analyzes a sequence of frames to detect fidgeting behavior.
-
-        Args:
-            video_path (str): Path to the video file.
-
-        Returns:
-            float: The percentage of frames with detected fidgeting.
-        """
-        self.clear_memory()
-
-        video = cv2.VideoCapture(video_path)
-
-        # Check if the video was opened successfully
-        if not video.isOpened():
-            print("Error: Could not open video.")
-
-        frames = []
-        while True:
-            # Read the next frame from the video
-            ret, frame = video.read()
-
-            # If the frame was not read successfully, break the loop
-            if not ret:
-                break
-
-            # Add the frame to the list
-            frames.append(frame)
-
-        # Release the video capture object
-        video.release()
-
-        prev_frame = frames[0]
-        for frame in frames[1:]:
-            try:
-                self.detect_fidget(frame, prev_frame, draw_collisions=False)
-            except Exception as e:
-                print(f"Error during fidget detection: {e}")
-            prev_frame = frame
-
-        return self.get_fidget_percentage()
-
-
-    def ros_analyze(self, video_path: str) -> float:
+    def analyze(self, video_path: str) -> float:
         """
         Analyzes a sequence of frames to detect fidgeting behavior.
 
@@ -551,4 +507,4 @@ if __name__=='__main__':
     node=FidgetNode()
 
     cprint('Analyzing Data...', 'green', attrs=['bold'])
-    print(node.ros_analyze(args.path))
+    print(node.analyze(args.path))
