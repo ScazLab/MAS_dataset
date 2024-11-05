@@ -1,4 +1,4 @@
-# MAS_dataset
+# MAS Dataset
 *Debasmita Ghose, Oz Gitelson, Brian Scassellati*
 
 *Yale University*
